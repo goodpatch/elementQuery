@@ -145,6 +145,11 @@
 
     var processStyleSheet = function (styleSheet, force) {
         
+        // Firefoxでエラーが出るためCross OriginのCSSは読み込まない
+        if (styleSheet.href && !styleSheet.href.match(location.host)) {
+          return;
+        }
+
         if (cssRules == null) {
             setCssRules();
         }
